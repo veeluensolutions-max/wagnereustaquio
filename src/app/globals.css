@@ -1,0 +1,280 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap');
+
+:root {
+  /* Fontes Oficiais do Sistema Tipográfico */
+  --font-heading: var(--font-manrope), 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-dm-sans), 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-editorial: var(--font-newsreader), 'Newsreader', Georgia, serif;
+  --font-script: var(--font-caveat), 'Caveat', cursive;
+
+  /* Cores e Tokens de Identidade */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0b192c;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --brand-navy: #0b192c;
+  --brand-blue: #1e3e62;
+  --brand-accent: #0284c7;
+  --brand-emerald: #059669;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   SISTEMA TIPOGRÁFICO GLOBAL: REGRAS E TOKENS
+   ========================================================================== */
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.68;
+  letter-spacing: -0.008em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Títulos Globais: Manrope com pesos sofisticados (sem 800/900) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+/* Parágrafos: DM Sans 400, respiro e conforto de leitura */
+p {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.006em;
+}
+
+/* Acessibilidade: Skip to Content */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  background: #0b192c;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  z-index: 9999;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  border-radius: 0.375rem;
+  text-decoration: none;
+  border: 2px solid #38bdf8;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Foco visível WCAG AA */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   CLASSES UTILITÁRIAS DO DESIGN SYSTEM TIPOGRÁFICO
+   ========================================================================== */
+
+/* Famílias Tipográficas */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-sans);
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* HERO H1: Clamp equilibrado, entre 2.75rem e 4.8rem, line-height 0.98–1.02, letter-spacing -0.045em */
+.hero-h1-token {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 4.2vw, 4.8rem);
+  line-height: 1.0;
+  letter-spacing: -0.045em;
+}
+
+/* H2 de Seções: Manrope 650, letter-spacing -0.035em */
+.section-h2-token {
+  font-family: var(--font-heading);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+/* Nome Profissional Oficial: Manrope 650, claramente secundário ao H1 */
+.name-professional-token {
+  font-family: var(--font-heading);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+/* Títulos de Cards: Manrope 600 */
+.card-title-token {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Estatísticas e Números de Impacto: Manrope 700 */
+.stat-number-token {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+/* Eyebrows: DM Sans 600, caixa alta, letter-spacing 0.08em–0.12em */
+.eyebrow-token {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Navegação: DM Sans 500, sem bold pesado */
+.nav-link-token {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+/* Botões: DM Sans 600 */
+.btn-text-token {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* Metadados e Textos Auxiliares: DM Sans 500/600, nunca menores que 13px */
+.meta-text-token {
+  font-family: var(--font-sans);
+  font-size: clamp(0.8125rem, 1.2vw, 0.875rem); /* 13px–14px */
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+/* Corpo Textual Padrão: DM Sans 400, mínimo 16px no mobile */
+.body-text-token {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.1vw, 1.125rem); /* 16px–18px */
+  line-height: 1.7;
+  letter-spacing: -0.008em;
+}
+
+/* Citação Institucional: Newsreader Italic opcional de alta distinção */
+.quote-editorial-token {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   EFEITOS TRANSLÚCIDOS E ESTILOS COMPLEMENTARES
+   ========================================================================== */
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.glass-card-dark {
+  background: rgba(11, 25, 44, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.glow-ambient {
+  box-shadow: 0 0 60px -15px rgba(2, 132, 199, 0.12);
+}
+
+.glow-ambient-dark {
+  box-shadow: 0 0 80px -20px rgba(56, 189, 248, 0.2);
+}
+
+.tech-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
+}
+
+/* Utilitários específicos para experiência em iPhone / iOS */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Otimização de toque em telas mobile */
+button, a, input, select {
+  -webkit-tap-highlight-color: transparent;
+}
