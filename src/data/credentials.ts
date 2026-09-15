@@ -57,13 +57,13 @@ export const CREDENTIALS_DATA: CredentialItem[] = [
   },
   {
     id: "mit-extension",
-    degree: "Data Science & Big Data",
+    degree: "Formação Complementar em Data Science & Big Data",
     institution: "Massachusetts Institute of Technology",
     institutionShort: "MIT",
     period: "2025",
     type: "extension",
-    description: "Programa executivo: Making Data-Driven Decisions (45h de carga horária registrada).",
-    highlightNote: "Formação complementar / Extensão universitária",
+    description: "Programa executivo: Making Data-Driven Decisions (45h de carga horária registrada pelo MIT).",
+    highlightNote: "Formação complementar / Extensão executiva",
     isComplementary: true,
   },
 ];

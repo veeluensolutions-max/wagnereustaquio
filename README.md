@@ -13,6 +13,8 @@ Posicionamento: *"Da ciência à aplicação: Engenharia, Inteligência Artifici
 - **Ícones:** Lucide React
 - **SEO & Dados Estruturados:** JSON-LD Schema.org (`WebSite`, `WebPage`, `Person`, `ProfilePage`, `Article`, `Book`, `BreadcrumbList`)
 - **Analytics & LGPD:** Google Tag Manager (GTM), Google Analytics 4 (GA4) com suporte nativo ao **Google Consent Mode v2**.
+- **Segurança:** Content-Security-Policy (CSP), Strict-Transport-Security (HSTS), X-Frame-Options, X-Content-Type-Options, Permissions-Policy.
+- **Acessibilidade:** WCAG 2.2 AA (skip link, anéis de foco, tap targets 44px, safe area insets para iPhone).
 
 ---
 
@@ -35,7 +37,7 @@ npm run dev
 
 ### Compilação para Produção (Build)
 ```bash
-# Compilar e gerar as rotas estáticas pré-renderizadas (SSG)
+# Compilar e gerar as 101 rotas estáticas pré-renderizadas (SSG)
 npm run build
 
 # Iniciar o servidor de produção
@@ -50,17 +52,18 @@ Crie um arquivo `.env.local` na raiz do projeto baseado no `.env.example`:
 
 ```env
 # URL canônica da plataforma (sem barra no final)
-NEXT_PUBLIC_SITE_URL=https://wagnervasconcelos.com.br
+NEXT_PUBLIC_SITE_URL=https://wagnereustaquio.com.br
 
 # Google Tag Manager (GTM)
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 
 # Google Analytics 4 (quando disparado via GTM ou diretamente)
-NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 
-# Webhooks opcionais para automação de e-mail (ActiveCampaign, Mailchimp, etc.)
-# NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL=https://api.seuservico.com/webhook/newsletter
+# Webhooks opcionais para automação de e-mail e CRM
 # NEXT_PUBLIC_CONTACT_WEBHOOK_URL=https://api.seuservico.com/webhook/contato
+# NEXT_PUBLIC_WHATSAPP_NUMBER=5581999999999
+# NEXT_PUBLIC_CONTACT_EMAIL=contato@wagner-vasconcelos.eng.br
 ```
 
 ---
@@ -71,7 +74,7 @@ Todo o conteúdo editorial, biográfico e técnico está desacoplado dos compone
 
 ### 4.1 Adicionar ou Modificar Artigos Técnicos
 Edite o arquivo `src/data/articles.ts`:
-- Cada artigo possui `slug`, `title`, `subtitle`, `category`, `excerpt`, `readTime`, `publishedAt`, `updatedAt`, `sections` (com títulos e parágrafos) e `references`.
+- Cada artigo possui `slug`, `title`, `subtitle`, `category`, `excerpt`, `readTime`, `publishedAt`, `updatedAt`, `sections` e `references`.
 - As novas rotas `/conhecimento/artigos/[slug]` e o `sitemap.xml` serão gerados automaticamente na próxima compilação.
 
 ### 4.2 Adicionar ou Modificar Publicações Científicas
@@ -84,12 +87,12 @@ Edite o arquivo `src/data/products.ts`:
 
 ### 4.4 Substituir Imagens
 - A fotografia oficial do perfil está localizada em `public/images/wagner-vasconcelos.jpg`.
-- Para atualizar a foto oficial, substitua esse arquivo por uma foto profissional mantendo o mesmo nome de arquivo ou atualize as referências em `HeroSection.tsx` e `lib/schema.ts`.
+- As insígnias institucionais oficiais (USP, IME, UFPE, MIT) estão em `public/images/instituicoes/`.
 - A capa oficial do livro pode ser adicionada em `public/images/livro-logica-fuzzy.jpg` e vinculada em `BookSection.tsx`.
 
 ---
 
-## 5. Google Tag Manager e Analytics
+## 5. Google Tag Manager, Analytics e Consent Mode v2
 
 A plataforma possui uma camada centralizada em `src/lib/analytics.ts` que manipula o `window.dataLayer`.
 
@@ -102,18 +105,23 @@ Eventos mapeados e prontos para acionamento no GTM:
 - `request_mentoring`: Disparado na aplicação de mentorias técnicas.
 - `click_lattes`: Disparado ao clicar em links externos do CNPq Lattes.
 
-### Banner de Cookies e Consent Mode v2
-O banner em `src/components/analytics/CookieConsentBanner.tsx` armazena a escolha no navegador e envia o evento `consent_update` para o `dataLayer`, mantendo a conformidade estrita com a LGPD e as diretrizes do Google Consent Mode v2.
+Documentações dedicadas:
+- [`ANALYTICS-EVENTS.md`](file:///./ANALYTICS-EVENTS.md): Dicionário completo de 35 eventos e parâmetros.
+- [`CONSENT-IMPLEMENTATION.md`](file:///./CONSENT-IMPLEMENTATION.md): Arquitetura de consentimento e LGPD.
+- [`GA4-SETUP.md`](file:///./GA4-SETUP.md): Configuração de propriedades, fluxos de dados e públicos.
+- [`GTM-SETUP.md`](file:///./GTM-SETUP.md): Guia de tags, acionadores e variáveis.
+- [`GOOGLE-ADS-PREP.md`](file:///./GOOGLE-ADS-PREP.md): Conversões e remarketing para Google Ads.
 
 ---
 
-## 6. Configuração de Domínio e Search Console
+## 6. Homologação de Produção & Lançamento
 
-1. **Domínio:** Aponte os registros DNS (tipo `A` e `CNAME`) do seu provedor de domínio (ex: Registro.br) para o servidor de hospedagem (Vercel, AWS ou VPS).
-2. **Google Search Console:**
-   - Adicione a propriedade `https://wagnervasconcelos.com.br`.
-   - Submeta o sitemap gerado automaticamente em `https://wagnervasconcelos.com.br/sitemap.xml`.
-   - O arquivo `robots.txt` já aponta dinamicamente para o sitemap.
+Consulte o documento completo:
+👉 [`PRODUCTION-LAUNCH-CHECKLIST.md`](file:///./PRODUCTION-LAUNCH-CHECKLIST.md)
+
+1. **Domínio:** Aponte os registros DNS (tipo `A` e `CNAME`) do seu provedor de domínio para a Vercel.
+2. **Google Search Console:** Submeta o sitemap gerado em `https://wagnereustaquio.com.br/sitemap.xml`.
+3. **Rollback:** Procedimento documentado de restauração com 1 clique no painel Vercel ou via Git.
 
 ---
 

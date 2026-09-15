@@ -80,7 +80,7 @@ export default function QuickSearchModal({ isOpen, onClose }: QuickSearchModalPr
       id: "sobre-form",
       title: "Formação Acadêmica",
       category: "Titulações",
-      description: "Graduação, mestrado, doutorado, pós-doutorados e extensão no MIT.",
+      description: "Graduação, mestrado, doutorado, pós-doutorados e formação complementar no MIT.",
       href: "/sobre/formacao",
       type: "page",
     },

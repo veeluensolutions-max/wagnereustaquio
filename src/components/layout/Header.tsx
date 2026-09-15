@@ -55,6 +55,25 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Bloquear rolagem do body e suporte à tecla Escape quando menu mobile estiver aberto
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setMobileMenuOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [mobileMenuOpen]);
+
   return (
     <header className="sticky top-3 sm:top-4 z-50 w-full px-3 sm:px-6 lg:px-8 transition-all duration-300">
       <div
@@ -300,8 +319,8 @@ export default function Header() {
               ))}
             </div>
 
-            {/* Ações inferiores para alcance confortável do polegar */}
-            <div className="px-6 pt-3 border-t border-slate-100 space-y-2.5">
+            {/* Ações inferiores para alcance confortável do polegar com Safe Area iOS */}
+            <div className="px-6 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))] border-t border-slate-100 space-y-2.5">
               <Link
                 href="/produtos/cursos"
                 onClick={() => setMobileMenuOpen(false)}
