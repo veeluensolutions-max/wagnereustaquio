@@ -20,41 +20,37 @@ interface LanguageContextType {
 }
 
 const STORAGE_KEY = "preferred_language";
-const GOOG_COOKIE_NAME = "googtrans";
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Helper para gerenciar o cookie de tradução do Google (modo silencioso)
-function setGoogleTranslateCookie(lang: Language) {
-  if (typeof document === "undefined") return;
+// Define ou remove os cookies do Google Translate para tradução total do DOM
+function applyGoogleTranslateCookies(lang: Language) {
+  if (typeof document === "undefined" || typeof window === "undefined") return;
 
-  const domain = window.location.hostname;
-  const isLocalhost = domain === "localhost" || domain === "127.0.0.1";
-  const domainPart = isLocalhost ? "" : `; domain=.${domain}`;
+  const hostname = window.location.hostname;
+  const isLocal = hostname === "localhost" || hostname === "127.0.0.1";
+  const targetCode = lang === "en" ? "en" : lang === "es" ? "es" : "";
 
-  if (lang === "pt-BR") {
-    // Remover cookie do Google Translate para voltar ao original
-    document.cookie = `${GOOG_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/${domainPart};`;
-    document.cookie = `${GOOG_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  if (!targetCode || lang === "pt-BR") {
+    // Limpeza profunda de cookies para restaurar português original
+    const cookiesToClear = ["googtrans"];
+    cookiesToClear.forEach((name) => {
+      document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+      document.cookie = `${name}=; path=/; domain=${hostname}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+      if (!isLocal) {
+        document.cookie = `${name}=; path=/; domain=.${hostname}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+      }
+    });
   } else {
-    const targetCode = lang === "en" ? "en" : "es";
-    const cookieValue = `/pt/${targetCode}`;
-    document.cookie = `${GOOG_COOKIE_NAME}=${cookieValue}; path=/${domainPart}; max-age=31536000; SameSite=Lax`;
-    document.cookie = `${GOOG_COOKIE_NAME}=${cookieValue}; path=/; max-age=31536000; SameSite=Lax`;
-  }
-}
-
-// Disparar atualização do Google Translate se disponível no DOM
-function triggerGoogleTranslateElement(lang: Language) {
-  if (typeof window === "undefined" || typeof document === "undefined") return;
-
-  const targetCode = lang === "pt-BR" ? "pt" : lang === "en" ? "en" : "es";
-
-  // Buscar combo padrão do Google Translate caso exista no DOM
-  const combo = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-  if (combo) {
-    combo.value = targetCode;
-    combo.dispatchEvent(new Event("change"));
+    // Define os cookies de tradução para todos os escopos necessários
+    const pairs = [`/pt/${targetCode}`, `/auto/${targetCode}`];
+    pairs.forEach((val) => {
+      document.cookie = `googtrans=${val}; path=/; max-age=31536000; SameSite=Lax;`;
+      document.cookie = `googtrans=${val}; path=/; domain=${hostname}; max-age=31536000; SameSite=Lax;`;
+      if (!isLocal) {
+        document.cookie = `googtrans=${val}; path=/; domain=.${hostname}; max-age=31536000; SameSite=Lax;`;
+      }
+    });
   }
 }
 
@@ -62,23 +58,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("pt-BR");
   const [isChanging, setIsChanging] = useState(false);
 
-  // Inicialização no lado do cliente
+  // Inicialização no cliente
   useEffect(() => {
     try {
       const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
       if (savedLang && (savedLang === "pt-BR" || savedLang === "en" || savedLang === "es")) {
         setLanguageState(savedLang);
         document.documentElement.lang = savedLang === "pt-BR" ? "pt-BR" : savedLang === "en" ? "en" : "es";
-        setGoogleTranslateCookie(savedLang);
-      } else {
-        // Detecção opcional via navegador
-        const browserLang = navigator.language?.toLowerCase() || "";
-        if (browserLang.startsWith("en")) {
-          // Mantemos pt-BR como padrão corporativo conforme regra de negócio, mas permitimos troca instantânea
-        }
+        applyGoogleTranslateCookies(savedLang);
       }
     } catch {
-      // Ignorar erros de armazenamento
+      // Ignorar erros locais
     }
   }, []);
 
@@ -91,23 +81,30 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.setItem(STORAGE_KEY, newLang);
       document.documentElement.lang = newLang === "pt-BR" ? "pt-BR" : newLang === "en" ? "en" : "es";
-      setGoogleTranslateCookie(newLang);
-      triggerGoogleTranslateElement(newLang);
+      applyGoogleTranslateCookies(newLang);
 
-      // Tracking analítico da ação do usuário
+      // Tracking analítico da ação
       trackEvent("change_language", {
         language: newLang,
         source: "language_switcher",
       });
+
+      // Tenta acionar diretamente se o widget já existir
+      if (typeof window !== "undefined" && typeof window.__switchGoogleLanguage === "function") {
+        window.__switchGoogleLanguage(newLang);
+      }
+
+      // Recarrega suavemente a página em 120ms para aplicar a tradução global no DOM inteiro
+      setTimeout(() => {
+        if (typeof window !== "undefined") {
+          window.location.reload();
+        }
+      }, 120);
     } catch {
-      // Fallback gracioso
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
     }
-
-    const timer = setTimeout(() => {
-      setIsChanging(false);
-    }, 350);
-
-    return () => clearTimeout(timer);
   }, [language]);
 
   const currentOption = useMemo(() => {
