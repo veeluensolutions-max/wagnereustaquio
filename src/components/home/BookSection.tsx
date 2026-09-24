@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { PUBLISHED_BOOK } from "@/data/book";
 import { BookOpen, Check, ArrowRight, ShieldCheck, Bookmark } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BookSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 lg:py-24 bg-slate-50/80 border-b border-slate-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,7 +45,7 @@ export default function BookSection() {
                   </div>
 
                   <span className="text-[10px] font-heading font-semibold uppercase tracking-widest text-sky-400 block mb-1.5">
-                    Publicação Acadêmica Oficial
+                    {t.sections.bookBadge}
                   </span>
                   <h4 className="font-heading font-[650] text-base leading-snug tracking-tight text-white drop-shadow-sm group-hover:text-sky-200 transition-colors">
                     {PUBLISHED_BOOK.title}
@@ -64,7 +69,7 @@ export default function BookSection() {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/80 text-[11px] font-body font-semibold uppercase tracking-[0.1em] text-sky-800 mb-3">
                   <BookOpen className="w-3.5 h-3.5 text-sky-700" />
-                  <span>OBRA PUBLICADA & REGISTRADA</span>
+                  <span>{t.sections.bookBadge}</span>
                 </div>
                 <h2 className="section-h2-token text-2xl sm:text-3xl lg:text-4xl text-slate-950 mb-3">
                   {PUBLISHED_BOOK.title}
@@ -77,7 +82,7 @@ export default function BookSection() {
               {/* Eixos da Obra com Checkmarks Esmeralda */}
               <div className="space-y-2.5 pt-1">
                 <p className="text-xs font-heading font-semibold uppercase tracking-wider text-slate-500">
-                  Eixos fundamentais abordados na obra:
+                  {t.common.readMore}:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {PUBLISHED_BOOK.scope.map((item, index) => (
@@ -97,13 +102,13 @@ export default function BookSection() {
                   href={PUBLISHED_BOOK.href}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-sky-950 active:bg-slate-950 text-white text-xs font-heading font-semibold transition-all group shadow-md shadow-slate-900/15"
                 >
-                  <span>{PUBLISHED_BOOK.ctaText}</span>
+                  <span>{t.sections.bookCta}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <div className="flex items-center gap-2 text-xs text-slate-500 font-body">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>Obra catalogada e registrada na produção do autor</span>
+                  <span>{t.footer.verifiedData}</span>
                 </div>
               </div>
 
@@ -116,4 +121,3 @@ export default function BookSection() {
     </section>
   );
 }
-

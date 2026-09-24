@@ -1,16 +1,15 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { AUTHORITY_AREAS } from "@/data/authorityAreas";
 import { Cpu, ShieldAlert, Leaf, GraduationCap, ArrowRight, Check } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
-const ICON_MAP = {
-  Cpu: Cpu,
-  ShieldAlert: ShieldAlert,
-  Leaf: Leaf,
-  GraduationCap: GraduationCap,
-};
+const ICONS = [Cpu, ShieldAlert, Leaf, GraduationCap];
 
 export default function AuthorityAreasSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 lg:py-24 bg-white border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,20 +17,20 @@ export default function AuthorityAreasSection() {
         {/* Cabeçalho da Seção */}
         <div className="max-w-3xl mb-14">
           <span className="font-body text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-800 block mb-2">
-            PILARES DE ATUAÇÃO
+            {t.authority.badge}
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-[650] text-slate-950 tracking-[-0.035em] leading-[1.15] mb-4">
-            Conhecimento multidisciplinar para problemas complexos.
+            {t.authority.title}
           </h2>
           <p className="font-body text-base sm:text-lg text-slate-600 leading-[1.7] font-normal tracking-[-0.008em]">
-            Quatro áreas que conectam trajetória acadêmica, experiência industrial e produção de conhecimento.
+            {t.authority.description}
           </p>
         </div>
 
         {/* Grid de 4 Cards de Pilares */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {AUTHORITY_AREAS.map((area) => {
-            const Icon = ICON_MAP[area.iconName as keyof typeof ICON_MAP] || Cpu;
+          {t.authority.areas.map((area, idx) => {
+            const Icon = ICONS[idx] || Cpu;
 
             return (
               <div
@@ -46,7 +45,7 @@ export default function AuthorityAreasSection() {
                     </div>
                     <div>
                       <span className="font-body text-[10px] font-semibold uppercase tracking-[0.1em] text-sky-800">
-                        Pilar de Especialidade
+                        {t.authority.pilarBadge}
                       </span>
                       <h3 className="font-heading text-xl lg:text-2xl font-semibold text-slate-950 tracking-[-0.025em] leading-snug">
                         {area.title}
@@ -62,10 +61,10 @@ export default function AuthorityAreasSection() {
                   {/* Tópicos Chave */}
                   <div className="space-y-2.5 mb-8">
                     <p className="font-body text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-400">
-                      Tópicos Centrais:
+                      {t.common.readMore}:
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {area.topics.map((topic, index) => (
+                      {area.highlights.map((topic, index) => (
                         <div key={index} className="flex items-center gap-2 font-body text-xs sm:text-[13px] text-slate-700 font-medium tracking-normal">
                           <Check className="w-3.5 h-3.5 text-sky-600 shrink-0" />
                           <span>{topic}</span>
@@ -78,10 +77,10 @@ export default function AuthorityAreasSection() {
                 {/* CTA do Pilar */}
                 <div className="pt-4 border-t border-slate-100">
                   <Link
-                    href={area.ctaHref}
+                    href={area.href}
                     className="font-body inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-sky-800 group-hover:translate-x-1 transition-all min-h-[44px] tracking-[-0.005em]"
                   >
-                    <span>{area.ctaText}</span>
+                    <span>{t.common.viewAll}</span>
                     <ArrowRight className="w-4 h-4 text-sky-700" />
                   </Link>
                 </div>

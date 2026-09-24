@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
-import { STATS_DATA } from "@/data/stats";
 import { Info } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function StatsSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 lg:py-24 bg-gradient-to-b from-white via-slate-50/50 to-white border-b border-slate-200/70 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,18 +14,18 @@ export default function StatsSection() {
         {/* Título da Seção */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-body text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-800 block mb-2">
-            EXPERIÊNCIA E ESCALA
+            {t.stats.badge}
           </span>
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-[650] text-slate-950 tracking-[-0.035em] leading-[1.15]">
-            Uma trajetória construída entre ciência, ensino e indústria.
+            {t.stats.title}
           </h2>
         </div>
 
-        {/* Grid de Números: Manrope 700 para números, DM Sans 400-500 para descrições */}
+        {/* Grid de Números */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {STATS_DATA.map((stat) => (
+          {t.stats.items.map((stat, idx) => (
             <div
-              key={stat.id}
+              key={idx}
               className="card-elevation-hover group relative overflow-hidden bg-white/90 backdrop-blur-sm p-7 rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-[0_16px_36px_rgba(15,23,42,0.06)] hover:border-sky-300/80 transition-all duration-300 flex flex-col justify-between"
             >
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

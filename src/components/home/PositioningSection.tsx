@@ -4,44 +4,18 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Microscope, BrainCircuit, Cog, CheckCircle, ArrowRight as ArrowRightIcon } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
-const PIPELINE_STEPS = [
-  {
-    id: "pesquisa",
-    step: "01",
-    label: "Pesquisa",
-    icon: Microscope,
-    tagline: "Rigor científico e métodos quantitativos",
-    detail: "Investigação acadêmica profunda em modelos matemáticos, lógica fuzzy, redes neurais e leis físicas de processos.",
-  },
-  {
-    id: "conhecimento",
-    step: "02",
-    label: "Conhecimento",
-    icon: BrainCircuit,
-    tagline: "Sistematização e validação contínua",
-    detail: "Transformação de dados brutos e pesquisas em metodologias estruturadas, publicações científicas e material didático.",
-  },
-  {
-    id: "aplicacao",
-    step: "03",
-    label: "Aplicação",
-    icon: Cog,
-    tagline: "Execução em ambiente industrial real",
-    detail: "Implementação direta em plantas químicas, estudos de dispersão com AERMOD, auditorias NR-13 e análise de perigos HAZOP.",
-  },
-  {
-    id: "resultado",
-    step: "04",
-    label: "Resultado",
-    icon: CheckCircle,
-    tagline: "Segurança, conformidade e eficiência",
-    detail: "Decisões operacionais precisas, mitigação de riscos catastróficos, cumprimento regulatório e ganhos de sustentabilidade.",
-  },
-];
+const STEP_ICONS = [Microscope, BrainCircuit, Cog, CheckCircle];
 
 export default function PositioningSection() {
-  const [activeStep, setActiveStep] = useState<string>("aplicacao");
+  const { t } = useLanguage();
+  const [activeStepIndex, setActiveStepIndex] = useState<number>(2);
+
+  const steps = t.positioning.steps.map((step, idx) => ({
+    ...step,
+    icon: STEP_ICONS[idx] || Cog,
+  }));
 
   return (
     <section className="py-20 lg:py-24 bg-[#071322] text-white relative overflow-hidden border-b border-slate-800/80">
@@ -54,19 +28,19 @@ export default function PositioningSection() {
         {/* Bloco de Texto Principal */}
         <div className="max-w-3xl mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 font-body text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-300 mb-5">
-            CONCEITO INTELECTUAL
+            {t.positioning.badge}
           </div>
 
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-[650] tracking-[-0.035em] text-white mb-6 leading-[1.15]">
-            Da pesquisa à aplicação.
+            {t.positioning.title}
           </h2>
 
           <p className="font-body text-base sm:text-lg text-slate-300 leading-[1.7] mb-4 font-normal tracking-[-0.008em]">
-            Ao longo de sua trajetória, Wagner Eustáquio de Vasconcelos construiu uma atuação que conecta pesquisa científica, ensino superior, engenharia aplicada e solução de problemas reais da indústria.
+            {t.positioning.p1}
           </p>
 
           <p className="font-body text-sm sm:text-base text-slate-400 leading-[1.7] mb-8 font-normal tracking-[-0.006em]">
-            Seu trabalho transita entre Inteligência Artificial, modelagem matemática, segurança de processos, emissões atmosféricas, monitoramento ambiental e tomada de decisão.
+            {t.positioning.p2}
           </p>
 
           <Link
@@ -74,7 +48,7 @@ export default function PositioningSection() {
             onClick={() => trackEvent("select_item", { item_name: "Posicionamento CTA Trajetoria" })}
             className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-body text-sm font-semibold transition-all shadow-lg shadow-sky-600/25 group min-h-[48px] tracking-[-0.005em]"
           >
-            <span>Conheça a trajetória completa</span>
+            <span>{t.positioning.cta}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -86,14 +60,14 @@ export default function PositioningSection() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {PIPELINE_STEPS.map((item, idx) => {
+            {steps.map((item, idx) => {
               const IconComponent = item.icon;
-              const isSelected = activeStep === item.id;
+              const isSelected = activeStepIndex === idx;
 
               return (
                 <div
-                  key={item.id}
-                  onClick={() => setActiveStep(item.id)}
+                  key={item.step}
+                  onClick={() => setActiveStepIndex(idx)}
                   className={`cursor-pointer p-6 rounded-3xl border transition-all duration-300 relative select-none min-h-[120px] ${
                     isSelected
                       ? "bg-slate-900/90 border-sky-400/60 shadow-xl shadow-sky-950/60 ring-1 ring-sky-400/40"
@@ -119,7 +93,7 @@ export default function PositioningSection() {
                     {item.detail}
                   </p>
 
-                  {idx < PIPELINE_STEPS.length - 1 && (
+                  {idx < steps.length - 1 && (
                     <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
                       <ArrowRightIcon className="w-3.5 h-3.5 text-slate-600" />
                     </div>
@@ -128,10 +102,6 @@ export default function PositioningSection() {
               );
             })}
           </div>
-
-          <p className="font-body text-[11.5px] text-slate-400 mt-6 italic">
-            * Toque em qualquer etapa para visualizar os desdobramentos de cada elo na tomada de decisão de engenharia.
-          </p>
         </div>
 
       </div>
