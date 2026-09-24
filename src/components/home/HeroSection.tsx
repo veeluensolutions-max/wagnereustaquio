@@ -75,86 +75,91 @@ export default function HeroSection() {
               Engenheiro, pesquisador e professor com trajetória acadêmica e industrial em Inteligência Artificial, Segurança de Processos, Engenharia Ambiental, Modelagem e Soluções Industriais.
             </p>
 
-            {/* 5. OS 4 CARDS DE CREDENCIAIS (GRID 2x2 TRANSLÚCIDO) */}
+            {/* 5. OS 4 CARDS DE CREDENCIAIS (GRID 2x2 TRANSLÚCIDO E INTERATIVO) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               {/* Card 1: Doutorado */}
-              <div className="p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-sky-300 hover:shadow-sm transition-all flex items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-sky-100/70 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <div className="card-elevation-hover relative overflow-hidden p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 hover:border-sky-400/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] flex items-start gap-3 group">
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white group-hover:border-transparent group-hover:scale-105 transition-all duration-300 shadow-2xs">
                   <GraduationCap className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em]">
+                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em] group-hover:text-sky-950 transition-colors">
                     Doutorado em Tecnologias Energéticas e Nucleares
                   </p>
-                  <p className="font-body font-semibold text-[11.5px] text-sky-800 mt-0.5 tracking-normal">
+                  <p className="font-body font-semibold text-[11.5px] text-sky-700 mt-0.5 tracking-normal">
                     UFPE
                   </p>
                 </div>
               </div>
 
               {/* Card 2: Mestrado */}
-              <div className="p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-sky-300 hover:shadow-sm transition-all flex items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-sky-100/70 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <div className="card-elevation-hover relative overflow-hidden p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 hover:border-sky-400/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] flex items-start gap-3 group">
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white group-hover:border-transparent group-hover:scale-105 transition-all duration-300 shadow-2xs">
                   <Cog className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em]">
+                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em] group-hover:text-sky-950 transition-colors">
                     Mestrado em Engenharia Nuclear
                   </p>
-                  <p className="font-body font-semibold text-[11.5px] text-sky-800 mt-0.5 tracking-normal">
+                  <p className="font-body font-semibold text-[11.5px] text-sky-700 mt-0.5 tracking-normal">
                     IME
                   </p>
                 </div>
               </div>
 
               {/* Card 3: Especialização */}
-              <div className="p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-sky-300 hover:shadow-sm transition-all flex items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-sky-100/70 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <div className="card-elevation-hover relative overflow-hidden p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 hover:border-sky-400/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] flex items-start gap-3 group">
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white group-hover:border-transparent group-hover:scale-105 transition-all duration-300 shadow-2xs">
                   <Shield className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em]">
+                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em] group-hover:text-sky-950 transition-colors">
                     Engenharia de Segurança do Trabalho
                   </p>
-                  <p className="font-body font-semibold text-[11.5px] text-sky-800 mt-0.5 tracking-normal">
+                  <p className="font-body font-semibold text-[11.5px] text-sky-700 mt-0.5 tracking-normal">
                     USP
                   </p>
                 </div>
               </div>
 
               {/* Card 4: MIT Extensão */}
-              <div className="p-3.5 rounded-2xl bg-white/85 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_16px_rgba(15,23,42,0.03)] hover:border-sky-300 hover:shadow-sm transition-all flex items-start gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-sky-100/70 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+              <div className="card-elevation-hover relative overflow-hidden p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/90 hover:border-sky-400/80 shadow-[0_4px_20px_rgba(15,23,42,0.04)] flex items-start gap-3 group">
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center shrink-0 group-hover:bg-sky-600 group-hover:text-white group-hover:border-transparent group-hover:scale-105 transition-all duration-300 shadow-2xs">
                   <BarChart3 className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em]">
+                  <p className="font-heading font-semibold text-[13px] sm:text-[14px] text-slate-900 leading-snug tracking-[-0.015em] group-hover:text-sky-950 transition-colors">
                     Data Science & Big Data
                   </p>
-                  <p className="font-body font-semibold text-[11.5px] text-sky-800 mt-0.5 tracking-normal">
+                  <p className="font-body font-semibold text-[11.5px] text-sky-700 mt-0.5 tracking-normal">
                     MIT — Extensão 45h
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* 6. CTAs DA HERO: DM Sans 600, sem bold pesado */}
+            {/* 6. CTAs DA HERO: DM Sans 600, micro-interações fluidas */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link
                 href="/sobre/trajetoria"
                 onClick={() => trackEvent("select_item", { item_name: "Hero CTA Trajetoria" })}
-                className="font-body font-semibold text-sm inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl text-white bg-[#07172e] hover:bg-sky-950 active:bg-sky-900 shadow-md shadow-slate-950/20 hover:shadow-lg transition-all group min-h-[48px] tracking-[-0.005em]"
+                className="font-body font-semibold text-sm relative overflow-hidden inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl text-white bg-[#07172e] hover:bg-sky-950 active:bg-sky-900 shadow-lg shadow-slate-950/20 hover:shadow-xl hover:shadow-sky-950/25 transition-all duration-300 group min-h-[48px] tracking-[-0.005em]"
               >
-                <span>Conheça minha trajetória</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10">Conheça minha trajetória</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 relative z-10" />
+                <div className="absolute inset-0 w-1/2 h-full bg-white/10 skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none" />
               </Link>
 
               <Link
                 href="/produtos/cursos"
                 onClick={() => trackEvent("select_item", { item_name: "Hero CTA Cursos" })}
-                className="font-body font-semibold text-sm inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-slate-800 bg-white/90 hover:bg-white active:bg-slate-100 border border-slate-300/80 shadow-2xs hover:shadow-sm transition-all group min-h-[48px] tracking-[-0.005em]"
+                className="font-body font-semibold text-sm inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-slate-800 bg-white/95 hover:bg-white active:bg-slate-100 border border-slate-300/80 shadow-xs hover:shadow-md hover:border-sky-300 transition-all duration-300 group min-h-[48px] tracking-[-0.005em]"
               >
-                <BookOpen className="w-4 h-4 text-sky-700" />
+                <BookOpen className="w-4 h-4 text-sky-700 group-hover:scale-110 transition-transform" />
                 <span>Explore cursos e conteúdos</span>
               </Link>
             </div>
@@ -166,9 +171,9 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent("click_lattes", { location: "hero_subtext" })}
-                className="font-body font-medium text-[13px] text-slate-500 hover:text-sky-850 transition-colors inline-flex items-center gap-1.5 min-h-[36px]"
+                className="font-body font-medium text-[13px] text-slate-500 hover:text-sky-850 transition-colors inline-flex items-center gap-1.5 min-h-[36px] group"
               >
-                <ExternalLink className="w-3.5 h-3.5 text-sky-700 shrink-0" />
+                <ExternalLink className="w-3.5 h-3.5 text-sky-700 shrink-0 group-hover:translate-x-0.5 transition-transform" />
                 <span>Consulta de produção acadêmica e técnica na Plataforma Lattes do CNPq →</span>
               </a>
             </div>
@@ -198,8 +203,11 @@ export default function HeroSection() {
           {/* 7. IMAGEM / RETRATO OFICIAL COM CALIGRAFIA E VIDRO TRANSLÚCIDO */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end mt-4 lg:mt-0">
             <div className="relative w-full max-w-[340px] sm:max-w-md">
+              {/* Halo luminoso de ambientação e profundidade */}
+              <div className="absolute -inset-3 sm:-inset-5 bg-gradient-to-tr from-sky-500/20 via-sky-300/10 to-indigo-500/15 rounded-[3rem] blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
+
               {/* Moldura flutuante translúcida */}
-              <div className="relative bg-white/75 backdrop-blur-2xl p-3.5 rounded-[2.5rem] border border-white/90 shadow-[0_24px_70px_rgba(15,23,42,0.12)]">
+              <div className="relative bg-white/80 backdrop-blur-2xl p-3.5 rounded-[2.5rem] border border-white/95 shadow-[0_24px_70px_rgba(15,23,42,0.12)]">
                 
                 {/* Watermark textual superior direito: DM Sans 600 */}
                 <div className="absolute top-6 right-6 z-10 text-right select-none pointer-events-none">
@@ -210,14 +218,14 @@ export default function HeroSection() {
                 </div>
 
                 {/* Retrato oficial */}
-                <div className="relative aspect-[3.4/4] w-full rounded-[2rem] overflow-hidden bg-slate-100">
+                <div className="relative aspect-[3.4/4] w-full rounded-[2rem] overflow-hidden bg-slate-100 shadow-inner">
                   <Image
                     src="/images/wagner-vasconcelos.jpg"
                     alt="Retrato oficial do Prof. Dr. Wagner Eustáquio de Vasconcelos"
                     fill
                     sizes="(max-width: 640px) 340px, (max-width: 1024px) 380px, 440px"
                     priority
-                    className="object-cover object-top hover:scale-[1.01] transition-transform duration-700 ease-out"
+                    className="object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out"
                   />
 
                   {/* Caligrafia exclusiva manuscrita sobre a foto: Caveat script */}
@@ -240,11 +248,14 @@ export default function HeroSection() {
                   </p>
                 </div>
 
-                {/* Sub-barra com validação CNPq */}
+                {/* Sub-barra com validação CNPq com indicador pulsante vivo */}
                 <div className="mt-2.5 px-3 py-1 flex items-center justify-between text-xs text-slate-600 font-body font-medium">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[11.5px] text-slate-600">Atuação Científica e Industrial</span>
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-[11.5px] text-slate-700 font-semibold">Atuação Científica e Industrial</span>
                   </div>
                   <a
                     href="http://lattes.cnpq.br/7844785807954101"

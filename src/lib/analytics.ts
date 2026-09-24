@@ -59,7 +59,8 @@ export type AnalyticsEventName =
   | "click_product_related_article"
   | "begin_checkout"
   | "purchase"
-  | "consent_update";
+  | "consent_update"
+  | "change_language";
 
 // Chaves protegidas: termos proibidos para evitar envio inadvertido de PII ao GA4/GTM
 const FORBIDDEN_PII_KEYS = [

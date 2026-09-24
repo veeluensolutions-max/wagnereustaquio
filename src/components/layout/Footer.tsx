@@ -5,16 +5,19 @@ import Link from "next/link";
 import { FOOTER_NAVIGATION } from "@/data/navigation";
 import { ExternalLink, ShieldCheck, Award } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FooterProps {
   onOpenCookiePreferences?: () => void;
 }
 
 export default function Footer({ onOpenCookiePreferences }: FooterProps) {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-slate-950 text-slate-300 border-t border-slate-800" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
-        Rodapé institucional
+        {t.footer.heading}
       </h2>
 
       {/* Faixa superior de síntese e autoridade */}
@@ -23,15 +26,15 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex flex-col">
               <span className="font-body text-xs uppercase tracking-[0.1em] text-sky-400 font-semibold">
-                Plataforma de Autoridade Técnica & Científica
+                {t.footer.tagline}
               </span>
               <span className="font-heading text-xl font-[650] text-white tracking-[-0.02em] mt-1">
-                Prof. Dr. Wagner Eustáquio de Vasconcelos
+                {t.footer.title}
               </span>
             </div>
 
             <p className="font-body text-sm text-slate-400 leading-[1.65] max-w-md font-normal">
-              Engenharia, Inteligência Artificial e Sustentabilidade aplicadas a problemas reais da indústria e da pesquisa científica.
+              {t.footer.summary}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -43,13 +46,13 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
                 className="font-body inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-900 border border-slate-700/80 text-xs text-sky-300 hover:text-white hover:border-sky-500 transition-colors"
               >
                 <Award className="w-3.5 h-3.5 text-sky-400" />
-                <span>Base Lattes CNPq</span>
+                <span>{t.footer.lattesBadge}</span>
                 <ExternalLink className="w-3 h-3 text-slate-500" />
               </a>
 
               <div className="font-body inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-900/60 border border-slate-800 text-xs text-slate-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Dados Factuais Verificados</span>
+                <span>{t.footer.verifiedData}</span>
               </div>
             </div>
           </div>
@@ -59,7 +62,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
             {/* Coluna 1: Wagner Vasconcelos */}
             <div>
               <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-slate-100 mb-4">
-                Wagner Vasconcelos
+                {t.footer.colAuthor}
               </p>
               <ul className="space-y-2.5 text-sm font-body">
                 {FOOTER_NAVIGATION.autor.map((item) => (
@@ -78,7 +81,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
             {/* Coluna 2: Conhecimento */}
             <div>
               <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-slate-100 mb-4">
-                Conhecimento
+                {t.footer.colKnowledge}
               </p>
               <ul className="space-y-2.5 text-sm font-body">
                 {FOOTER_NAVIGATION.conhecimento.map((item) => (
@@ -97,7 +100,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
             {/* Coluna 3: Produtos */}
             <div>
               <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-slate-100 mb-4">
-                Produtos
+                {t.footer.colProducts}
               </p>
               <ul className="space-y-2.5 text-sm font-body">
                 {FOOTER_NAVIGATION.produtos.map((item) => (
@@ -116,7 +119,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
             {/* Coluna 4: Profissional */}
             <div>
               <p className="font-body text-xs font-semibold uppercase tracking-[0.08em] text-slate-100 mb-4">
-                Profissional
+                {t.footer.colProfessional}
               </p>
               <ul className="space-y-2.5 text-sm font-body">
                 {FOOTER_NAVIGATION.profissional.map((item) => (
@@ -136,17 +139,17 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
 
         {/* Faixa Inferior Legal & Regulatória */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-body">
-          <p>© 2026 Wagner Eustáquio de Vasconcelos. Todos os direitos reservados.</p>
+          <p>© 2026 Wagner Eustáquio de Vasconcelos. {t.footer.rightsReserved}</p>
 
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/privacidade" className="hover:text-slate-300 transition-colors">
-              Privacidade
+              {t.footer.privacy}
             </Link>
             <Link href="/termos" className="hover:text-slate-300 transition-colors">
-              Termos de Uso
+              {t.footer.terms}
             </Link>
             <Link href="/cookies" className="hover:text-slate-300 transition-colors">
-              Cookies
+              {t.footer.cookies}
             </Link>
             {onOpenCookiePreferences ? (
               <button

@@ -8,6 +8,8 @@ import CookieConsentBanner from "@/components/analytics/CookieConsentBanner";
 import GoogleTagManager from "@/components/analytics/GoogleTagManager";
 import PageViewTracker from "@/components/analytics/PageViewTracker";
 import { getHomepageSchema } from "@/lib/schema";
+import { LanguageProvider } from "@/context/LanguageContext";
+import GoogleTranslateScript from "@/components/layout/GoogleTranslateScript";
 
 // Fontes oficiais do sistema tipográfico de alta sofisticação editorial
 const manrope = Manrope({
@@ -113,23 +115,26 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-slate-50/40 text-slate-900 selection:bg-sky-100 selection:text-sky-900 font-sans">
-        <GoogleTagManager />
-        <Suspense fallback={null}>
-          <PageViewTracker />
-        </Suspense>
-        {/* Acessibilidade: Skip link para navegação por teclado */}
-        <a href="#main-content" className="skip-link">
-          Pular para o conteúdo principal
-        </a>
+        <LanguageProvider>
+          <GoogleTagManager />
+          <Suspense fallback={null}>
+            <PageViewTracker />
+          </Suspense>
+          {/* Acessibilidade: Skip link para navegação por teclado */}
+          <a href="#main-content" className="skip-link">
+            Pular para o conteúdo principal
+          </a>
 
-        <Header />
+          <Header />
 
-        <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
-          {children}
-        </main>
+          <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
 
-        <Footer />
-        <CookieConsentBanner />
+          <Footer />
+          <CookieConsentBanner />
+          <GoogleTranslateScript />
+        </LanguageProvider>
       </body>
     </html>
   );

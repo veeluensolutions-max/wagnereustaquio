@@ -22,10 +22,12 @@ export default function StatsSection() {
           {STATS_DATA.map((stat) => (
             <div
               key={stat.id}
-              className="bg-white/80 backdrop-blur-sm p-7 rounded-3xl border border-slate-200/80 shadow-2xs hover:shadow-[0_12px_32px_rgba(15,23,42,0.06)] hover:border-sky-300/80 transition-all duration-300 flex flex-col justify-between"
+              className="card-elevation-hover group relative overflow-hidden bg-white/90 backdrop-blur-sm p-7 rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-[0_16px_36px_rgba(15,23,42,0.06)] hover:border-sky-300/80 transition-all duration-300 flex flex-col justify-between"
             >
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
               <div>
-                <p className="font-heading text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-slate-950 mb-2.5">
+                <p className="font-heading text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-slate-950 mb-2.5 group-hover:text-sky-850 transition-colors">
                   {stat.number}
                 </p>
                 <h3 className="font-heading text-sm sm:text-[15px] font-semibold text-slate-950 mb-1.5 tracking-[-0.015em]">
