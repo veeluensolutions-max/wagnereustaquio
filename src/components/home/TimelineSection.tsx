@@ -1,9 +1,34 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { TIMELINE_DATA } from "@/data/timeline";
 import { ArrowRight, Calendar } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function TimelineSection() {
+  const { language } = useLanguage();
+
+  const labels = {
+    "pt-BR": {
+      badge: "CRONOLOGIA & MARCOS",
+      title: "Uma trajetória de evolução contínua.",
+      cta: "Ver trajetória completa",
+    },
+    "en": {
+      badge: "CHRONOLOGY & MILESTONES",
+      title: "A journey of continuous evolution.",
+      cta: "View complete timeline",
+    },
+    "es": {
+      badge: "CRONOLOGÍA E HITOS",
+      title: "Una trayectoria de evolución continua.",
+      cta: "Ver trayectoria completa",
+    },
+  };
+
+  const current = labels[language] || labels["pt-BR"];
+
   return (
     <section className="py-20 lg:py-24 bg-slate-50/60 border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,20 +37,21 @@ export default function TimelineSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-slate-200/70">
           <div>
             <span className="text-[11px] font-bold uppercase tracking-widest text-sky-800 block mb-2">
-              CRONOLOGIA & MARCOS
+              {current.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight">
-              Uma trajetória de evolução contínua.
+              {current.title}
             </h2>
           </div>
           <Link
             href="/sobre/trajetoria"
             className="inline-flex items-center gap-1.5 text-sm font-bold text-sky-850 hover:text-sky-950 mt-4 md:mt-0 transition-colors group min-h-[44px]"
           >
-            <span>Ver trajetória completa</span>
+            <span>{current.cta}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-sky-700" />
           </Link>
         </div>
+
 
         {/* Timeline Estruturada e Responsiva */}
         <div className="relative">

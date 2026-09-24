@@ -1,9 +1,34 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { TECHNICAL_PROJECTS } from "@/data/projects";
 import { ArrowRight, Layers, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ProjectsSection() {
+  const { language } = useLanguage();
+
+  const labels = {
+    "pt-BR": {
+      badge: "APLICAÇÃO PRÁTICA",
+      title: "Projetos que conectam engenharia, ambiente e inovação.",
+      cta: "Ver projetos e pesquisas",
+    },
+    "en": {
+      badge: "PRACTICAL APPLICATION",
+      title: "Projects bridging engineering, sustainability, and innovation.",
+      cta: "View projects & research",
+    },
+    "es": {
+      badge: "APLICACIÓN PRÁCTICA",
+      title: "Proyectos que conectan ingeniería, medio ambiente e innovación.",
+      cta: "Ver proyectos e investigaciones",
+    },
+  };
+
+  const current = labels[language] || labels["pt-BR"];
+
   return (
     <section className="py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,20 +37,21 @@ export default function ProjectsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-6 border-b border-slate-200">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-sky-700 block mb-2">
-              APLICAÇÃO PRÁTICA
+              {current.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
-              Projetos que conectam engenharia, ambiente e inovação.
+              {current.title}
             </h2>
           </div>
           <Link
             href="/projetos"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-800 hover:text-sky-900 mt-4 md:mt-0 transition-colors group"
           >
-            <span>Ver projetos e pesquisas</span>
+            <span>{current.cta}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
+
 
         {/* Grid dos 6 Cards de Projetos */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

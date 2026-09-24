@@ -35,7 +35,7 @@ export const DICTIONARY_MAP: TranslationMap = {
   "UFPE (2011–2015) e IME (2026)": { en: "UFPE (2011–2015) and IME (2026)", es: "UFPE (2011–2015) e IME (2026)" },
   "Especialização:": { en: "Specialization:", es: "Especialización:" },
   "Especialização": { en: "Specialization", es: "Especialización" },
-  "Engenharia de Segurança do Trabalho — USP (634h)": { en: "Occupational Safety Engineering — USP (634h)", es: "Ingeniería de Seguridad en el Trabajo — USP (634h)" },
+  "Engenharia de Segurança do Trabalho — USP (634h)": { en: "Occupational Safety Engineering — USP (634h)", es: "Ingeniería de Seguridad en el Trabalho — USP (634h)" },
   "Formação Complementar:": { en: "Complementary Training:", es: "Formación Complementaria:" },
   "Formação Complementar": { en: "Complementary Training", es: "Formación Complementaria" },
   "Data Science & Big Data — MIT (Extensão Executiva 45h, 2025)": { en: "Data Science & Big Data — MIT (Professional Education 45h, 2025)", es: "Data Science & Big Data — MIT (Extensión Ejecutiva 45h, 2025)" },
@@ -62,6 +62,58 @@ export const DICTIONARY_MAP: TranslationMap = {
   "Da universidade à indústria": { en: "From Academia to Real-World Industry", es: "De la universidad a la industria" },
   "Dados, inovação e atualização permanente": { en: "Data, Innovation and Lifelong Learning", es: "Datos, innovación y actualización continua" },
   
+  // Home - Seção de Credenciais
+  "FORMAÇÃO & PESQUISA": { en: "EDUCATION & RESEARCH", es: "FORMACIÓN E INVESTIGACIÓN" },
+  "Credenciais acadêmicas de alta exigência": { en: "High-Standard Academic Credentials", es: "Credenciales académicas de alta exigencia" },
+  "Fundamentação científica construída em instituições de excelência nacional e internacional.": {
+    en: "Scientific rigor developed across premier national and international academic institutions.",
+    es: "Fundamentación científica construida en instituciones de excelencia nacional e internacional."
+  },
+  "Ênfase em IA e Redes Neuro-Fuzzy": { en: "Emphasis in AI & Neuro-Fuzzy Networks", es: "Énfasis en IA y Redes Neuro-Fuzzy" },
+  "Modelagem Computacional": { en: "Computational Modeling", es: "Modelado Computacional" },
+  "Prevenção e Análise de Risco": { en: "Risk Analysis & Prevention", es: "Prevención y Análisis de Riesgos" },
+  "Tomada de Decisão com Dados": { en: "Data-Driven Decision Making", es: "Toma de Decisiones Basada en Datos" },
+  "Trajetória Acadêmica e Formações Complementares Registradas": {
+    en: "Academic Background and Registered Professional Credentials",
+    es: "Trayectoria Académica y Formaciones Complementarias Registradas"
+  },
+  "Ver memorial acadêmico detalhado no Sobre →": {
+    en: "Explore full academic profile in About →",
+    es: "Ver perfil académico detallado en Sobre mí →"
+  },
+  "Ciência e engenharia a serviço de pessoas, organizações e de um futuro mais sustentável.": {
+    en: "Science and engineering serving people, organizations, and a more sustainable future.",
+    es: "Ciencia e ingeniería al servicio de personas, organizaciones y un futuro más sostenible."
+  },
+
+  // Home - Cronologia & Marcos
+  "CRONOLOGIA & MARCOS": { en: "CHRONOLOGY & MILESTONES", es: "CRONOLOGÍA E HITOS" },
+  "Uma trajetória de evolução contínua.": { en: "A journey of continuous evolution.", es: "Una trayectoria de evolución continua." },
+  "Ver trajetória completa": { en: "View complete timeline", es: "Ver trayectoria completa" },
+
+  // Home - Atuação Industrial
+  "ATUAÇÃO INDUSTRIAL": { en: "INDUSTRIAL EXPERIENCE", es: "ACTUACIÓN INDUSTRIAL" },
+  "Conhecimento testado fora da sala de aula.": { en: "Expertise tested outside the classroom.", es: "Conocimiento probado fuera del aula." },
+  "A atuação profissional de Wagner reúne pesquisa científica e execução técnica em diferentes segmentos industriais e institucionais.": {
+    en: "Wagner's professional career bridges scientific research and high-stakes technical execution across diverse industrial sectors.",
+    es: "La actuación profesional de Wagner reúne investigación científica y ejecución técnica en diversos sectores industriales."
+  },
+
+  // Home - Aplicação Prática / Projetos
+  "APLICAÇÃO PRÁTICA": { en: "PRACTICAL APPLICATION", es: "APLICACIÓN PRÁCTICA" },
+  "Projetos que conectam engenharia, ambiente e inovação.": {
+    en: "Projects bridging engineering, sustainability, and innovation.",
+    es: "Proyectos que conectan ingeniería, medio ambiente e innovación."
+  },
+  "Ver projetos e pesquisas": { en: "View projects & research", es: "Ver proyectos e investigaciones" },
+
+  // Home - Produção Científica
+  "PRODUÇÃO CIENTÍFICA": { en: "SCIENTIFIC PRODUCTION", es: "PRODUCCIÓN CIENTÍFICA" },
+  "Pesquisa e produção científica.": { en: "Research and scientific production.", es: "Investigación y producción científica." },
+
+  // Home - Docência & Ensino Superior
+  "DOCÊNCIA & ENSINO SUPERIOR": { en: "TEACHING & HIGHER EDUCATION", es: "DOCENCIA Y EDUCACIÓN SUPERIOR" },
+
   // Hub Sobre
   "SOBRE WAGNER": { en: "ABOUT WAGNER", es: "SOBRE WAGNER" },
   "Uma trajetória construída entre ciência, engenharia e aplicação.": {
@@ -141,6 +193,7 @@ export const DICTIONARY_MAP: TranslationMap = {
   "Ler mais": { en: "Read more", es: "Leer más" },
   "Ver todos": { en: "View all", es: "Ver todos" },
   "Ver todas": { en: "View all", es: "Ver todas" },
+  "Ocultar detalhes": { en: "Hide details", es: "Ocultar detalles" },
   "Ver acervo completo de artigos": { en: "Explore full article collection", es: "Explorar colección completa de artículos" },
   "Conheça minha trajetória": { en: "Explore my background", es: "Conozca mi trayectoria" },
   "Conheça a trajetória completa": { en: "Explore full journey", es: "Conozca la trayectoria completa" },
@@ -205,4 +258,7 @@ export const VOCABULARY_REPLACEMENTS: Record<string, { en: string; es: string }>
   "Contato": { en: "Contact", es: "Contacto" },
   "Biografia": { en: "Biography", es: "Biografía" },
   "Trajetória": { en: "Timeline", es: "Trayectoria" },
+  "Credenciais": { en: "Credentials", es: "Credenciales" },
+  "acadêmicas": { en: "academic", es: "académicas" },
+  "exigência": { en: "standard", es: "exigencia" },
 };

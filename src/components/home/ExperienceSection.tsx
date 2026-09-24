@@ -1,8 +1,36 @@
+"use client";
+
 import React from "react";
 import { INDUSTRY_EXPERIENCE } from "@/data/industryExperience";
 import { Factory, ShieldCheck } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ExperienceSection() {
+  const { language } = useLanguage();
+
+  const labels = {
+    "pt-BR": {
+      badge: "ATUAÇÃO INDUSTRIAL",
+      title: "Conhecimento testado fora da sala de aula.",
+      description: "A atuação profissional de Wagner reúne pesquisa científica e execução técnica em diferentes segmentos industriais e institucionais.",
+      ethicsNote: "Os setores acima representam domínios técnicos de aplicação declarados no histórico de projetos do autor. Não implica vínculo ou endosso institucional direto.",
+    },
+    "en": {
+      badge: "INDUSTRIAL EXPERIENCE",
+      title: "Expertise tested outside the classroom.",
+      description: "Wagner's career bridges scientific research and high-stakes technical execution across diverse industrial sectors.",
+      ethicsNote: "The sectors above represent technical application domains documented across the author's project history. Does not imply direct institutional affiliation or endorsement.",
+    },
+    "es": {
+      badge: "ACTUACIÓN INDUSTRIAL",
+      title: "Conocimiento probado fuera del aula.",
+      description: "La actuación profesional de Wagner reúne investigación científica y ejecución técnica en diversos sectores industriales e institucionales.",
+      ethicsNote: "Los sectores anteriores representan dominios técnicos de aplicación declarados en el historial de proyectos del autor. No implica vínculo o respaldo institucional directo.",
+    },
+  };
+
+  const current = labels[language] || labels["pt-BR"];
+
   return (
     <section className="py-20 lg:py-24 bg-white border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,15 +38,16 @@ export default function ExperienceSection() {
         {/* Cabeçalho */}
         <div className="max-w-3xl mb-14">
           <span className="text-[11px] font-bold uppercase tracking-widest text-sky-800 block mb-2">
-            ATUAÇÃO INDUSTRIAL
+            {current.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-4">
-            Conhecimento testado fora da sala de aula.
+            {current.title}
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            A atuação profissional de Wagner reúne pesquisa científica e execução técnica em diferentes segmentos industriais e institucionais.
+            {current.description}
           </p>
         </div>
+
 
         {/* Grid dos 10 Segmentos Industriais */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
@@ -46,9 +75,10 @@ export default function ExperienceSection() {
         <div className="mt-10 pt-4 flex items-center gap-2.5 text-xs text-slate-500 font-medium">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>
-            Os setores acima representam domínios técnicos de aplicação declarados no histórico de projetos do autor. Não implica vínculo ou endosso institucional direto.
+            {current.ethicsNote}
           </span>
         </div>
+
 
       </div>
     </section>
