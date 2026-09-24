@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronDown, Check } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Chapter {
   id: string;
@@ -11,11 +12,32 @@ interface Chapter {
 
 interface BiografiaChaptersNavProps {
   chapters: Chapter[];
+  navLabel?: string;
+  indexBtnLabel?: string;
+  readingSummaryLabel?: string;
 }
 
-export default function BiografiaChaptersNav({ chapters }: BiografiaChaptersNavProps) {
+export default function BiografiaChaptersNav({
+  chapters,
+  navLabel,
+  indexBtnLabel,
+  readingSummaryLabel,
+}: BiografiaChaptersNavProps) {
+  const { language } = useLanguage();
   const [activeId, setActiveId] = useState<string>("capitulo-1");
   const [isOpenMobile, setIsOpenMobile] = useState(false);
+
+  const displayNavLabel =
+    navLabel || (language === "en" ? "Chapters:" : language === "es" ? "Capítulos:" : "Capítulos:");
+  const displayIndexBtn =
+    indexBtnLabel || (language === "en" ? "Index" : language === "es" ? "Índice" : "Índice");
+  const displayReadingSummary =
+    readingSummaryLabel ||
+    (language === "en"
+      ? "Table of Contents"
+      : language === "es"
+      ? "Sumario de Lectura"
+      : "Sumário de Leitura");
 
   // Monitorar scroll para destacar capítulo ativo
   useEffect(() => {
@@ -55,7 +77,7 @@ export default function BiografiaChaptersNav({ chapters }: BiografiaChaptersNavP
         {/* Desktop: Pílulas de Navegação por Capítulos */}
         <div className="hidden lg:flex items-center space-x-1.5 overflow-x-auto py-1 scrollbar-none">
           <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-slate-400 mr-2 shrink-0">
-            Capítulos:
+            {displayNavLabel}
           </span>
           {chapters.map((chapter) => {
             const isActive = activeId === chapter.id;
@@ -82,7 +104,7 @@ export default function BiografiaChaptersNav({ chapters }: BiografiaChaptersNavP
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-sky-600" />
             <span className="font-body text-xs font-semibold text-slate-700">
-              {chapters.find((c) => c.id === activeId)?.title || "Sumário de Leitura"}
+              {chapters.find((c) => c.id === activeId)?.title || displayReadingSummary}
             </span>
           </div>
 
@@ -92,10 +114,11 @@ export default function BiografiaChaptersNav({ chapters }: BiografiaChaptersNavP
             className="font-body text-xs font-semibold text-sky-800 bg-sky-50 px-3 py-1.5 rounded-full border border-sky-200/80 flex items-center gap-1 cursor-pointer"
             aria-expanded={isOpenMobile}
           >
-            <span>Índice ({chapters.length})</span>
+            <span>{displayIndexBtn} ({chapters.length})</span>
             <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpenMobile ? "rotate-180" : ""}`} />
           </button>
         </div>
+
 
       </div>
 

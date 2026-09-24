@@ -10,6 +10,7 @@ import PageViewTracker from "@/components/analytics/PageViewTracker";
 import { getHomepageSchema } from "@/lib/schema";
 import { LanguageProvider } from "@/context/LanguageContext";
 import GoogleTranslateScript from "@/components/layout/GoogleTranslateScript";
+import UniversalTranslator from "@/components/layout/UniversalTranslator";
 
 // Fontes oficiais do sistema tipográfico de alta sofisticação editorial
 const manrope = Manrope({
@@ -133,9 +134,11 @@ export default function RootLayout({
 
           <Footer />
           <CookieConsentBanner />
+          <UniversalTranslator />
           <GoogleTranslateScript />
         </LanguageProvider>
       </body>
     </html>
   );
 }
+

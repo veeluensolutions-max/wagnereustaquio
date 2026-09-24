@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { getBreadcrumbsSchema } from "@/lib/schema";
+import { useLanguage } from "@/context/LanguageContext";
+import { DICTIONARY_MAP } from "@/lib/domTranslator";
 
 export interface BreadcrumbItem {
   label: string;
@@ -13,7 +17,19 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+  const { language } = useLanguage();
   const schema = getBreadcrumbsSchema(items);
+
+  const translateLabel = (label: string): string => {
+    if (language === "pt-BR") return label;
+    const directMatch = DICTIONARY_MAP[label];
+    if (directMatch && directMatch[language]) {
+      return directMatch[language];
+    }
+    return label;
+  };
+
+  const homeLabel = language === "en" ? "Home" : language === "es" ? "Inicio" : "Início";
 
   return (
     <nav aria-label="Breadcrumb" className="py-4">
@@ -28,12 +44,13 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
             className="flex items-center gap-1 hover:text-slate-900 transition-colors"
           >
             <Home className="w-3.5 h-3.5" />
-            <span className="sr-only">Início</span>
+            <span className="sr-only">{homeLabel}</span>
           </Link>
         </li>
 
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
+          const displayLabel = translateLabel(item.label);
 
           return (
             <li key={index} className="flex items-center gap-2">
@@ -43,11 +60,11 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                   href={item.href}
                   className="hover:text-slate-900 transition-colors"
                 >
-                  {item.label}
+                  {displayLabel}
                 </Link>
               ) : (
                 <span className="font-semibold text-slate-800" aria-current="page">
-                  {item.label}
+                  {displayLabel}
                 </span>
               )}
             </li>
@@ -57,3 +74,4 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
     </nav>
   );
 }
+

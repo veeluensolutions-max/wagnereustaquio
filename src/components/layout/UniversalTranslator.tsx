@@ -1,0 +1,158 @@
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
+import { DICTIONARY_MAP, VOCABULARY_REPLACEMENTS } from "@/lib/domTranslator";
+
+// Extensão de tipo para armazenar texto original no nó DOM
+interface ExtendedTextNode extends Text {
+  __originalText?: string;
+  __translatedLang?: string;
+}
+
+export default function UniversalTranslator() {
+  const { language } = useLanguage();
+  const pathname = usePathname();
+  const isTranslatingRef = useRef(false);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const translateNode = (textNode: ExtendedTextNode, targetLang: "en" | "es") => {
+      // Salva o texto original na primeira vez
+      if (textNode.__originalText === undefined) {
+        textNode.__originalText = textNode.textContent || "";
+      }
+
+      const original = textNode.__originalText;
+      if (!original || !original.trim()) return;
+
+      const trimmedOriginal = original.trim();
+
+      // 1. Verificação direta no dicionário de sentenças completas
+      if (DICTIONARY_MAP[trimmedOriginal]) {
+        const translated = DICTIONARY_MAP[trimmedOriginal][targetLang];
+        if (translated) {
+          textNode.textContent = original.replace(trimmedOriginal, translated);
+          textNode.__translatedLang = targetLang;
+          return;
+        }
+      }
+
+      // 2. Substituição de partes e frases contidas dentro do nó
+      let modified = original;
+      let hasChanges = false;
+
+      // Percorre frases chaves
+      for (const [ptPhrase, trans] of Object.entries(DICTIONARY_MAP)) {
+        if (ptPhrase.length > 3 && modified.includes(ptPhrase)) {
+          const replacement = trans[targetLang];
+          if (replacement && replacement !== ptPhrase) {
+            modified = modified.split(ptPhrase).join(replacement);
+            hasChanges = true;
+          }
+        }
+      }
+
+      // Percorre vocabulário individual apenas se não alterado
+      for (const [ptWord, trans] of Object.entries(VOCABULARY_REPLACEMENTS)) {
+        const regex = new RegExp(`\\b${ptWord}\\b`, "g");
+        if (regex.test(modified)) {
+          const replacement = trans[targetLang];
+          if (replacement) {
+            modified = modified.replace(regex, replacement);
+            hasChanges = true;
+          }
+        }
+      }
+
+      if (hasChanges) {
+        textNode.textContent = modified;
+        textNode.__translatedLang = targetLang;
+      }
+    };
+
+    const restoreNode = (textNode: ExtendedTextNode) => {
+      if (textNode.__originalText !== undefined) {
+        textNode.textContent = textNode.__originalText;
+        textNode.__translatedLang = undefined;
+      }
+    };
+
+    const processDOM = () => {
+      if (isTranslatingRef.current) return;
+      isTranslatingRef.current = true;
+
+      try {
+        const root = document.getElementById("main-content") || document.body;
+        if (!root) return;
+
+        const walker = document.createTreeWalker(
+          root,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode: (node) => {
+              const parent = node.parentElement;
+              if (!parent) return NodeFilter.FILTER_REJECT;
+
+              const tag = parent.tagName.toLowerCase();
+              if (
+                tag === "script" ||
+                tag === "style" ||
+                tag === "noscript" ||
+                tag === "code" ||
+                parent.classList.contains("notranslate")
+              ) {
+                return NodeFilter.FILTER_REJECT;
+              }
+
+              return NodeFilter.FILTER_ACCEPT;
+            },
+          }
+        );
+
+        let currentNode = walker.nextNode() as ExtendedTextNode | null;
+
+        while (currentNode) {
+          if (language === "pt-BR") {
+            restoreNode(currentNode);
+          } else {
+            translateNode(currentNode, language);
+          }
+          currentNode = walker.nextNode() as ExtendedTextNode | null;
+        }
+      } finally {
+        isTranslatingRef.current = false;
+      }
+    };
+
+    // Executa imediatamente e após renderização completa do componente
+    processDOM();
+    const timer = setTimeout(processDOM, 100);
+
+    // Observa mudanças dinâmicas no DOM (como navegações client-side)
+    const targetElement = document.getElementById("main-content") || document.body;
+    let observer: MutationObserver | null = null;
+
+    if (targetElement && window.MutationObserver) {
+      observer = new MutationObserver(() => {
+        if (!isTranslatingRef.current) {
+          processDOM();
+        }
+      });
+
+      observer.observe(targetElement, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
+  }, [language, pathname]);
+
+  return null;
+}
