@@ -11,6 +11,13 @@ interface ExtendedTextNode extends Text {
   __translatedLang?: string;
 }
 
+// Mapa normalizado de frases para match rápido
+const NORMALIZED_DICTIONARY: Record<string, { en: string; es: string }> = {};
+for (const [key, value] of Object.entries(DICTIONARY_MAP)) {
+  const normKey = key.replace(/\s+/g, " ").trim();
+  NORMALIZED_DICTIONARY[normKey] = value;
+}
+
 export default function UniversalTranslator() {
   const { language } = useLanguage();
   const pathname = usePathname();
@@ -29,8 +36,18 @@ export default function UniversalTranslator() {
       if (!original || !original.trim()) return;
 
       const trimmedOriginal = original.trim();
+      const normalizedOriginal = original.replace(/\s+/g, " ").trim();
 
       // 1. Verificação direta no dicionário de sentenças completas
+      if (NORMALIZED_DICTIONARY[normalizedOriginal]) {
+        const translated = NORMALIZED_DICTIONARY[normalizedOriginal][targetLang];
+        if (translated) {
+          textNode.textContent = original.replace(trimmedOriginal, translated);
+          textNode.__translatedLang = targetLang;
+          return;
+        }
+      }
+
       if (DICTIONARY_MAP[trimmedOriginal]) {
         const translated = DICTIONARY_MAP[trimmedOriginal][targetLang];
         if (translated) {
@@ -44,9 +61,9 @@ export default function UniversalTranslator() {
       let modified = original;
       let hasChanges = false;
 
-      // Percorre frases chaves
+      // Percorre frases chaves com comprimento relevante
       for (const [ptPhrase, trans] of Object.entries(DICTIONARY_MAP)) {
-        if (ptPhrase.length > 3 && modified.includes(ptPhrase)) {
+        if (ptPhrase.length > 2 && modified.includes(ptPhrase)) {
           const replacement = trans[targetLang];
           if (replacement && replacement !== ptPhrase) {
             modified = modified.split(ptPhrase).join(replacement);
@@ -55,7 +72,7 @@ export default function UniversalTranslator() {
         }
       }
 
-      // Percorre vocabulário individual apenas se não alterado
+      // Percorre vocabulário individual apenas se necessário
       for (const [ptWord, trans] of Object.entries(VOCABULARY_REPLACEMENTS)) {
         const regex = new RegExp(`\\b${ptWord}\\b`, "g");
         if (regex.test(modified)) {
@@ -85,7 +102,7 @@ export default function UniversalTranslator() {
       isTranslatingRef.current = true;
 
       try {
-        const root = document.getElementById("main-content") || document.body;
+        const root = document.body;
         if (!root) return;
 
         const walker = document.createTreeWalker(
@@ -102,6 +119,7 @@ export default function UniversalTranslator() {
                 tag === "style" ||
                 tag === "noscript" ||
                 tag === "code" ||
+                tag === "pre" ||
                 parent.classList.contains("notranslate")
               ) {
                 return NodeFilter.FILTER_REJECT;
@@ -129,13 +147,13 @@ export default function UniversalTranslator() {
 
     // Executa imediatamente e após renderização completa do componente
     processDOM();
-    const timer = setTimeout(processDOM, 100);
+    const timer = setTimeout(processDOM, 80);
 
-    // Observa mudanças dinâmicas no DOM (como navegações client-side)
-    const targetElement = document.getElementById("main-content") || document.body;
+    // Observa mudanças dinâmicas no DOM em todo o document.body
+    const targetElement = document.body;
     let observer: MutationObserver | null = null;
 
-    if (targetElement && window.MutationObserver) {
+    if (targetElement && typeof window !== "undefined" && window.MutationObserver) {
       observer = new MutationObserver(() => {
         if (!isTranslatingRef.current) {
           processDOM();

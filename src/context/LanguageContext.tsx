@@ -93,19 +93,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       if (typeof window !== "undefined" && typeof window.__switchGoogleLanguage === "function") {
         window.__switchGoogleLanguage(newLang);
       }
-
-      // Recarrega suavemente a página em 120ms para aplicar a tradução global no DOM inteiro
-      setTimeout(() => {
-        if (typeof window !== "undefined") {
-          window.location.reload();
-        }
-      }, 120);
     } catch {
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
+      // Ignorar erros locais
     }
   }, [language]);
+
 
   const currentOption = useMemo(() => {
     return (

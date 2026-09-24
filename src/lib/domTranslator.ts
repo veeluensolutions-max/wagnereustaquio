@@ -35,7 +35,7 @@ export const DICTIONARY_MAP: TranslationMap = {
   "UFPE (2011–2015) e IME (2026)": { en: "UFPE (2011–2015) and IME (2026)", es: "UFPE (2011–2015) e IME (2026)" },
   "Especialização:": { en: "Specialization:", es: "Especialización:" },
   "Especialização": { en: "Specialization", es: "Especialización" },
-  "Engenharia de Segurança do Trabalho — USP (634h)": { en: "Occupational Safety Engineering — USP (634h)", es: "Ingeniería de Seguridad en el Trabalho — USP (634h)" },
+  "Engenharia de Segurança do Trabalho — USP (634h)": { en: "Occupational Safety Engineering — USP (634h)", es: "Ingeniería de Seguridad en el Trabajo — USP (634h)" },
   "Formação Complementar:": { en: "Complementary Training:", es: "Formación Complementaria:" },
   "Formação Complementar": { en: "Complementary Training", es: "Formación Complementaria" },
   "Data Science & Big Data — MIT (Extensão Executiva 45h, 2025)": { en: "Data Science & Big Data — MIT (Professional Education 45h, 2025)", es: "Data Science & Big Data — MIT (Extensión Ejecutiva 45h, 2025)" },
@@ -162,6 +162,28 @@ export const DICTIONARY_MAP: TranslationMap = {
   "Ver linha do tempo completa →": { en: "View full chronological timeline →", es: "Ver cronología completa →" },
   "Ver titulações acadêmicas →": { en: "View academic degrees & titles →", es: "Ver titulaciones académicas →" },
 
+  // Contato
+  "ATENDIMENTO PROFISSIONAL & INSTITUCIONAL": { en: "PROFESSIONAL & INSTITUTIONAL ADVISORY", es: "ATENCIÓN PROFESIONAL E INSTITUCIONAL" },
+  "Vamos conversar?": { en: "Let's Connect", es: "¿Conversamos?" },
+  "Entre em contato para palestras, treinamentos, mentorias, projetos, colaborações acadêmicas ou imprensa.": {
+    en: "Get in touch for keynotes, executive training, mentorship, engineering projects, scientific collaborations, or press inquiries.",
+    es: "Póngase en contacto para conferencias, capacitaciones, mentorías, proyectos, colaboración científica o prensa."
+  },
+  "CANAIS DIRECIONADOS": { en: "DIRECT CHANNELS", es: "CANALES DIRECTOS" },
+  "Selecione o objetivo do seu contato:": { en: "Select the purpose of your inquiry:", es: "Seleccione el objetivo de su contacto:" },
+  "Enviar Mensagem Direta": { en: "Send Direct Message", es: "Enviar Mensaje Directo" },
+  "Nome Completo": { en: "Full Name", es: "Nombre Completo" },
+  "E-mail Corporativo ou Acadêmico": { en: "Corporate or Academic Email", es: "Correo Corporativo o Académico" },
+  "Telefone / WhatsApp": { en: "Phone / WhatsApp", es: "Teléfono / WhatsApp" },
+  "Empresa ou Instituição": { en: "Company or Institution", es: "Empresa o Institución" },
+  "Assunto da Mensagem": { en: "Subject of Message", es: "Asunto del Mensaje" },
+  "Mensagem Detalhada": { en: "Detailed Message", es: "Mensaje Detallado" },
+  "Enviar Mensagem": { en: "Send Message", es: "Enviar Mensaje" },
+  "Solicitar Palestra": { en: "Request Keynote", es: "Solicitar Conferencia" },
+  "Projetos e Consultoria": { en: "Projects & Consulting", es: "Proyectos y Consultoría" },
+  "Assessoria de Imprensa": { en: "Press & Media Relations", es: "Prensa y Medios" },
+  "Canal de Contato": { en: "Contact Channel", es: "Canal de Contacto" },
+
   // Navegação e Breadcrumb
   "Início": { en: "Home", es: "Inicio" },
   "Página Inicial": { en: "Home Page", es: "Página de Inicio" },
@@ -188,6 +210,15 @@ export const DICTIONARY_MAP: TranslationMap = {
   "Imprensa": { en: "Press & Media", es: "Prensa" },
   "Projetos": { en: "Projects & Cases", es: "Proyectos" },
   "Currículo Lattes": { en: "Lattes Curriculum", es: "Currículum Lattes" },
+  "Formação Acadêmica": { en: "Academic Background", es: "Formación Académica" },
+  "Currículo Lattes (CNPq)": { en: "Lattes Curriculum (CNPq)", es: "Currículum Lattes (CNPq)" },
+  "Livro Publicado": { en: "Published Book", es: "Libro Publicado" },
+  "Palestras e Conferências": { en: "Keynotes & Conferences", es: "Conferencias y Charlas" },
+  "Cursos de Extensão": { en: "Extension Courses", es: "Cursos de Extensión" },
+  "E-books Técnicos": { en: "Technical E-books", es: "E-books Técnicos" },
+  "Ferramentas e Planilhas": { en: "Tools & Spreadsheets", es: "Herramientas y Plantillas" },
+  "Mentorias Especializadas": { en: "Specialized Mentoring", es: "Mentorías Especializadas" },
+  "Treinamentos In-Company": { en: "In-Company Training", es: "Capacitaciones In-Company" },
   
   // Elementos Comuns e Botões
   "Ler mais": { en: "Read more", es: "Leer más" },

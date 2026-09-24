@@ -12,7 +12,37 @@ interface FooterProps {
 }
 
 export default function Footer({ onOpenCookiePreferences }: FooterProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const FOOTER_LABEL_TRANSLATIONS: Record<string, { en: string; es: string }> = {
+    "Sobre o Autor": { en: "About the Author", es: "Sobre el Autor" },
+    "Biografia": { en: "Biography", es: "Biografía" },
+    "Trajetória": { en: "Career Timeline", es: "Trayectoria" },
+    "Formação Acadêmica": { en: "Academic Background", es: "Formación Académica" },
+    "Currículo Lattes (CNPq)": { en: "Lattes Curriculum (CNPq)", es: "Currículum Lattes (CNPq)" },
+    "Artigos Técnicos": { en: "Technical Articles", es: "Artículos Técnicos" },
+    "Publicações Científicas": { en: "Scientific Publications", es: "Publicaciones Científicas" },
+    "Linhas de Pesquisa": { en: "Research Tracks", es: "Líneas de Investigación" },
+    "Livro Publicado": { en: "Published Book", es: "Libro Publicado" },
+    "Palestras e Conferências": { en: "Keynotes & Conferences", es: "Conferencias y Charlas" },
+    "Cursos de Extensão": { en: "Extension Courses", es: "Cursos de Extensión" },
+    "E-books Técnicos": { en: "Technical E-books", es: "E-books Técnicos" },
+    "Ferramentas e Planilhas": { en: "Tools & Spreadsheets", es: "Herramientas y Plantillas" },
+    "Mentorias Especializadas": { en: "Specialized Mentoring", es: "Mentorías Especializadas" },
+    "Treinamentos In-Company": { en: "In-Company Training", es: "Capacitaciones In-Company" },
+    "Lista de Interesse": { en: "Waitlist", es: "Lista de Espera" },
+    "Solicitar Palestra": { en: "Request Keynote", es: "Solicitar Conferencia" },
+    "Projetos e Consultoria": { en: "Projects & Consulting", es: "Proyectos y Consultoría" },
+    "Assessoria de Imprensa": { en: "Press & Media Relations", es: "Prensa y Medios" },
+    "Canal de Contato": { en: "Contact Channel", es: "Canal de Contacto" },
+  };
+
+  const getLabel = (label: string): string => {
+    if (language === "pt-BR") return label;
+    const trans = FOOTER_LABEL_TRANSLATIONS[label];
+    if (trans && trans[language]) return trans[language];
+    return label;
+  };
 
   return (
     <footer className="bg-slate-950 text-slate-300 border-t border-slate-800" aria-labelledby="footer-heading">
@@ -71,7 +101,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
                       href={item.href}
                       className="text-slate-400 hover:text-white transition-colors"
                     >
-                      {item.label}
+                      {getLabel(item.label)}
                     </Link>
                   </li>
                 ))}
@@ -90,7 +120,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
                       href={item.href}
                       className="text-slate-400 hover:text-white transition-colors"
                     >
-                      {item.label}
+                      {getLabel(item.label)}
                     </Link>
                   </li>
                 ))}
@@ -109,7 +139,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
                       href={item.href}
                       className="text-slate-400 hover:text-white transition-colors"
                     >
-                      {item.label}
+                      {getLabel(item.label)}
                     </Link>
                   </li>
                 ))}
@@ -128,7 +158,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
                       href={item.href}
                       className="text-slate-400 hover:text-white transition-colors"
                     >
-                      {item.label}
+                      {getLabel(item.label)}
                     </Link>
                   </li>
                 ))}
@@ -136,6 +166,7 @@ export default function Footer({ onOpenCookiePreferences }: FooterProps) {
             </div>
           </div>
         </div>
+
 
         {/* Faixa Inferior Legal & Regulatória */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-body">

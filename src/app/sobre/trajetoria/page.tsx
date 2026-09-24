@@ -5,16 +5,68 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { TIMELINE_DATA, TimelineCategory } from "@/data/timeline";
 import { Compass, GraduationCap, Microscope, Briefcase, BookOpen, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function TrajetoriaPage() {
+  const { language } = useLanguage();
   const [selectedFilter, setSelectedFilter] = useState<"todos" | TimelineCategory>("todos");
 
+  const texts = {
+    "pt-BR": {
+      badge: "CRONOLOGIA HISTÓRICA • 1995 A 2026",
+      title: "Trajetória",
+      subtitle: "Evolução cronológica e marcos estratégicos integrando ciência, docência e indústria.",
+      showing: "Mostrando",
+      of: "de",
+      milestones: "marcos estratégicos registrados.",
+      tabs: {
+        todos: "Todos os Marcos",
+        academico: "Acadêmico & Docência",
+        pesquisa: "Pesquisa & Ciência",
+        profissional: "Profissional & Indústria",
+        formacao: "Formação & Graus",
+      },
+    },
+    "en": {
+      badge: "HISTORICAL CHRONOLOGY • 1995 TO 2026",
+      title: "Career Timeline",
+      subtitle: "Chronological evolution and strategic milestones integrating science, higher education, and industrial engineering.",
+      showing: "Showing",
+      of: "of",
+      milestones: "registered strategic milestones.",
+      tabs: {
+        todos: "All Milestones",
+        academico: "Academic & Teaching",
+        pesquisa: "Research & Science",
+        profissional: "Professional & Industry",
+        formacao: "Education & Degrees",
+      },
+    },
+    "es": {
+      badge: "CRONOLOGÍA HISTÓRICA • 1995 A 2026",
+      title: "Trayectoria",
+      subtitle: "Evolución cronológica e hitos estratégicos integrando ciencia, docencia e industria.",
+      showing: "Mostrando",
+      of: "de",
+      milestones: "hitos estratégicos registrados.",
+      tabs: {
+        todos: "Todos los Hitos",
+        academico: "Académico y Docencia",
+        pesquisa: "Investigación y Ciencia",
+        profissional: "Profesional e Industria",
+        formacao: "Formación y Grados",
+      },
+    },
+  };
+
+  const cur = texts[language] || texts["pt-BR"];
+
   const filterTabs = [
-    { key: "todos", label: "Todos os Marcos", icon: Compass },
-    { key: "academico", label: "Acadêmico & Docência", icon: BookOpen },
-    { key: "pesquisa", label: "Pesquisa & Ciência", icon: Microscope },
-    { key: "profissional", label: "Profissional & Indústria", icon: Briefcase },
-    { key: "formacao", label: "Formação & Graus", icon: GraduationCap },
+    { key: "todos", label: cur.tabs.todos, icon: Compass },
+    { key: "academico", label: cur.tabs.academico, icon: BookOpen },
+    { key: "pesquisa", label: cur.tabs.pesquisa, icon: Microscope },
+    { key: "profissional", label: cur.tabs.profissional, icon: Briefcase },
+    { key: "formacao", label: cur.tabs.formacao, icon: GraduationCap },
   ];
 
   const filteredEvents = TIMELINE_DATA.filter((item) => {
@@ -30,7 +82,7 @@ export default function TrajetoriaPage() {
         <Breadcrumbs
           items={[
             { label: "Sobre o Autor", href: "/sobre" },
-            { label: "Trajetória" },
+            { label: cur.title },
           ]}
         />
 
@@ -38,15 +90,15 @@ export default function TrajetoriaPage() {
         <header className="py-8 sm:py-10 border-b border-slate-200/80 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200/70 text-[11px] font-body font-semibold uppercase tracking-[0.1em] text-sky-800">
             <Compass className="w-3.5 h-3.5" />
-            <span>CRONOLOGIA HISTÓRICA • 1995 A 2026</span>
+            <span>{cur.badge}</span>
           </div>
 
           <h1 className="font-heading font-[650] text-3xl sm:text-4xl lg:text-5xl text-slate-950 tracking-[-0.035em] leading-[1.12]">
-            Trajetória
+            {cur.title}
           </h1>
 
           <p className="font-body font-normal text-base sm:text-lg text-slate-600 leading-[1.65] tracking-[-0.008em]">
-            Evolução cronológica e marcos estratégicos integrando ciência, docência e indústria.
+            {cur.subtitle}
           </p>
         </header>
 
@@ -74,9 +126,10 @@ export default function TrajetoriaPage() {
             })}
           </div>
           <p className="font-body text-xs text-slate-400 mt-2">
-            Mostrando {filteredEvents.length} de {TIMELINE_DATA.length} marcos estratégicos registrados.
+            {cur.showing} {filteredEvents.length} {cur.of} {TIMELINE_DATA.length} {cur.milestones}
           </p>
         </div>
+
 
         {/* Linha do Tempo Estruturada e Otimizada para iPhone */}
         <div className="py-10 sm:py-14 relative">
